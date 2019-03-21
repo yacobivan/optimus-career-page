@@ -1,0 +1,29 @@
+<template>
+<a-layout class="base">
+    <a-layout-header class="app-header">
+        <img :src="logo" class="app-header__logo" alt="Pegadaian" />
+        <a-button class="app-header__button">Company Website</a-button>
+    </a-layout-header>
+    <a-layout-content class="app-body">
+        <router-view />
+    </a-layout-content>
+    <a-layout-footer class="app-footer">
+        Powered by Optimus Consulting &copy; 2019
+    </a-layout-footer>
+</a-layout>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            logo: require('../../assets/pegadaian-logo.png')
+        }
+    },
+    components: {
+        
+    }
+}
+</script>
+<style lang="scss" scoped>
+
+</style>

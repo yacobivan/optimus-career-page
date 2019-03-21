@@ -1,0 +1,32 @@
+@import './variables';
+
+.base {
+    // Minimum height set to display height
+    min-height: 100vh;
+}
+
+// Header
+.app-header {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: $header-height;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    z-index: 99;
+    .app-header__logo {
+        height: 24px;
+    }
+    .app-header__button {
+        margin-left: auto;
+    }
+}
+.app-body {
+    padding-top: $header-height;
+}
+// Footer
+.app-footer {
+    text-align: center;
+}
