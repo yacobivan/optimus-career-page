@@ -24,21 +24,29 @@
                     :department="job.department" 
                     :placementCity="job.placementCity" 
                     :placementCountry="job.placementCountry" 
-                    @clickApply="apply(job.id)"
+                    @clickApply="toJobDetail(job.jobPositionId)"
                 />
             </a-col>
         </a-row>
     </div>
-    <div class="section">
+    <div class="section company">
         <a-row>
             <a-col span="24" class="section__label">
                 <h1 class="heading">About Pegadaian</h1>
-                <h2 class="subheading">Take a glance to our company profile, seeing is believing</h2>
+                <!-- <h2 class="subheading">Take a glance to our company profile, seeing is believing</h2> -->
             </a-col>
             <a-col span="24">
-                {{aboutCompany}}
+                <p class="company__about">{{about}}</p>
+                <div class="company__video embed-responsive embed-responsive-16by9">
+                    <!-- <iframe class="embed-responsive-item"
+                        :src="videoUrl" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen /> -->
+                </div>
             </a-col>
         </a-row>
+        {{companyId}}
     </div>
 </div>
 </template>
@@ -50,8 +58,12 @@ export default {
     data() {
         return {
             bannerStaticImage: require('../../assets/startup.jpg'),
-            greeting: 'Hi, noble!',
-            tagline: 'Are you ready to be a part of our transformation?',
+            companyId: '',
+            greeting: '',
+            tagline: '',
+            about: '',
+            videoUrl: '',
+            jobs: [],
             jobPostGrid: {
                 md: {
                     span: 12
@@ -60,23 +72,6 @@ export default {
                     span: 24
                 }
             },
-            aboutCompany: '',
-            jobs: [
-                {
-                    id: '1',
-                    title: 'Junior Developer',
-                    department: 'Information & Technology',
-                    placementCity: 'Jakarta Pusat',
-                    placementCountry: 'Indonesia'
-                },
-                {
-                    id: '2',
-                    title: 'Senior QA',
-                    department: 'Information & Technology',
-                    placementCity: 'Jakarta Pusat',
-                    placementCountry: 'Indonesia'
-                }
-            ]
         }
     },
     components: { 
@@ -84,9 +79,51 @@ export default {
        CardJob
     },
     methods: {
-        apply(id) {
-            console.log('Apply hit!', id)
+        getCompanyInfo() {
+            this.$http.post('/company/findby/subdomain', {
+                subdomain: 'pegadaian'
+            })
+            .then(response => {
+                let res = response.data;
+                console.log(res);
+                this.companyId = res.companyId;
+                this.greeting = res.greeting;
+                this.tagline = res.tagline;
+                this.about = res.about;
+                this.videoUrl = this.youtubeUrlParser(res.videoUrl);
+                this.getJobs(this.companyId);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+        getJobs(_companyId) {
+            this.$http.post('/jobposition/listby/company', {
+                companyId: _companyId
+            })
+            .then(response => {
+                let res = response.data;
+                this.jobs = res.jobList;
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        },
+        toJobDetail(_id) {
+            console.log('Apply hit!', _id)
+            this.$router.push({
+                name: 'JobDetail',
+                params: {
+                    id: _id
+                }
+            })
+        },
+        youtubeUrlParser(youtubeUrl) {
+            return youtubeUrl.replace('watch?v=','embed/')
         }
+    },
+    created() {
+        this.getCompanyInfo();
     }
 }
 </script>
@@ -112,5 +149,13 @@ export default {
 }
 .card-job-container {
     margin-bottom: 24px;
+}
+.company {
+    .company__about {
+        text-align: center;
+    }
+    .company__video {
+        text-align: center;
+    }
 }
 </style>

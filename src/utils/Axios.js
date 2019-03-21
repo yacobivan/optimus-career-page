@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
-export const BASE_URL = 'http://103.86.162.252:1337' // Development
-// export const BASE_URL = 'http://103.86.162.252:1337' // Production
+export const BASE_URL = 'http://141.136.47.181:1903' // Development
+// export const BASE_URL = 'http://141.136.47.181:1903' // Production
 
 export const http = Axios.create({
     baseURL: BASE_URL,

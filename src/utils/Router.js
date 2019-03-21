@@ -9,7 +9,7 @@ import SinglePageAppLayout from '../views/_layouts/SinglePageAppLayout';
 
 // Pages
 import JobList from '../views/job/JobList';
-import TermCondition from '../views/static-content/TermCondition';
+import JobDetail from '../views/job/JobDetail';
 
 const router = new VueRouter({
     mode: 'hash',
@@ -24,13 +24,13 @@ const router = new VueRouter({
             name: 'Jobs',
             component: JobList,
             meta: {
-              title: 'Jobs List'
+              title: 'Job List'
             }
           },
           {
             path: 'jobs/:id',
             name: 'JobDetail',
-            component: TermCondition,
+            component: JobDetail,
             meta: {
               title: 'Job Detail'
             }
