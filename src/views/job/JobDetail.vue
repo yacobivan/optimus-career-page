@@ -6,7 +6,7 @@
                 <h1>{{job.title}}</h1>
                 <a-tag>{{job.department}}</a-tag>
                 <a-tag>{{job.placementCity}}, {{job.placementCountry}}</a-tag>
-                <a-tag>{{job.salaryCurrency}} {{parseFloat(job.salaryMin) | decimal}} - {{job.salaryMax}}</a-tag>
+                <a-tag>{{job.salaryCurrency}} {{job.salaryMin}} - {{job.salaryMax}}</a-tag>
             </div>
             <div class="description__part">
                 <h2 class="j">Job Description</h2>
@@ -225,34 +225,79 @@
                     <a-form-item label="Do you have social media account?">
                         <a-input 
                             placeholder="https://linkedin.com/youraccount..."
+                            v-decorator="['socialMediaUrl', {
+                                rules: [
+                                    {
+                                        required: false
+                                    }
+                                ]
+                            }]" 
                         />
                     </a-form-item>
                     <a-form-item label="How do you know Pegadaian opportunity?">
                         <a-textarea 
                             placeholder="Please describe..." 
                             :autosize="{ minRows: 3, maxRows: 5 }" 
+                            v-decorator="['source', {
+                                rules: [
+                                    {
+                                        required: false
+                                    }
+                                ]
+                            }]"
                         />
                     </a-form-item>
                     <a-form-item label="How would you build your career in Pegadaian?">
                         <a-textarea 
                             placeholder="Please describe..." 
                             :autosize="{ minRows: 3, maxRows: 5 }" 
+                            v-decorator="['questionExpectation', {
+                                rules: [
+                                    {
+                                        required: false
+                                    }
+                                ]
+                            }]"
                         />
                     </a-form-item>
                     <a-form-item label="What do you think of Pegadaian leader should be?">
                         <a-textarea 
                             placeholder="Please describe..." 
                             :autosize="{ minRows: 3, maxRows: 5 }" 
+                            v-decorator="['questionIdealism', {
+                                rules: [
+                                    {
+                                        required: false
+                                    }
+                                ]
+                            }]"
                         />
                     </a-form-item>
                     <a-form-item label="What is your vision and mission?">
                         <a-textarea 
                             placeholder="Please describe..." 
                             :autosize="{ minRows: 3, maxRows: 5 }" 
+                            v-decorator="['questionVisionMission', {
+                                rules: [
+                                    {
+                                        required: false
+                                    }
+                                ]
+                            }]"
                         />
                     </a-form-item>
                     <a-form-item label="Submit your resume (CV)">
-                        <a-upload placeholder="Enter city of birth">
+                        <a-upload 
+                            placeholder="Enter city of birth"
+                            v-decorator="['resumeFile', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your recent resume.'
+                                    }
+                                ]
+                            }]"
+                        >
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -295,8 +340,17 @@ export default {
                 console.log(error)
             })
         },
-        handleSubmit() {
+        handleSubmit(e) {
             console.log('Submit!')
+            e.preventDefault();
+            this.jobForm.validateFields((err, values) => {
+                if (!err) {
+                    console.log('Values', values)
+                    
+                } else {
+                    console.log('Incomplete')
+                }
+            })
         }
     },
     created() {
