@@ -314,6 +314,7 @@
 </template>
 
 <script>
+import params from '../../utils/BusinessParams'
 export default {
     data() {
         return {
@@ -346,7 +347,7 @@ export default {
             this.jobForm.validateFields((err, values) => {
                 if (!err) {
                     console.log('Values', values)
-                    
+
                 } else {
                     console.log('Incomplete')
                 }

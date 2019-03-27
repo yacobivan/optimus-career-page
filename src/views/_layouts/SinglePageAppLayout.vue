@@ -1,8 +1,8 @@
 <template>
 <a-layout class="base">
     <a-layout-header class="app-header">
-        <img :src="logo" class="app-header__logo" alt="Pegadaian" />
-        <a-button class="app-header__button">Company Website</a-button>
+        <img :src="logo" class="app-header__logo" alt="Pegadaian" @click="toJobList" />
+        <a-button class="app-header__button" @click="toCompanyWebsite(companyUrl)">Company Website</a-button>
     </a-layout-header>
     <a-layout-content class="app-body">
         <router-view />
@@ -16,11 +16,17 @@
 export default {
     data() {
         return {
-            logo: require('../../assets/pegadaian-logo.png')
+            logo: require('../../assets/pegadaian-logo.png'),
+            companyUrl: 'https://pegadaian.co.id'
         }
     },
-    components: {
-        
+    methods: {
+        toCompanyWebsite(url) {
+            window.open(url, '_blank')
+        },
+        toJobList() {
+            this.$router.push('/jobs')
+        }
     }
 }
 </script>
