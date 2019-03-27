@@ -85,7 +85,6 @@ export default {
         }
     },
     components: { 
-    //    BannerStatic,
        CardJob
     },
     methods: {
