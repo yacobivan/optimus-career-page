@@ -2,29 +2,15 @@
 
 // Icons list
 import {
-    faArrowCircleRight,
-    faCheck,
-    faCheckCircle,
-    faCopy,
-    faDownload,
-    faEnvelope,
-    faLock,
-    faMobileAlt,
-    faTachometerAlt,
-    faUsers
+    faBriefcase,
+    faMapMarker,
+    faMoneyBill
 } from '@fortawesome/free-solid-svg-icons';
 
 export default {
     icons: [
-        faArrowCircleRight,
-        faCheck,
-        faCheckCircle,
-        faCopy,
-        faDownload,
-        faEnvelope,
-        faLock,
-        faMobileAlt,
-        faTachometerAlt,
-        faUsers,
+        faBriefcase,
+        faMapMarker,
+        faMoneyBill
     ]
 }

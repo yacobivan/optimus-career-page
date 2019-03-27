@@ -20,6 +20,19 @@ library.add(...FontAwesomeIcons.icons);
 Vue.component('fa', FontAwesomeIcon);
 Vue.config.productionTip = false;
 
+// Filter Currency
+Vue.filter('toCurrency', function(value) {
+  if (typeof value !== 'number') {
+    return value;
+  }
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0
+  });
+  return formatter.format(value);
+})
+
 new Vue({
   el: '#app',
   router,

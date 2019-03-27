@@ -1,12 +1,21 @@
 <template>
 <div class="job-detail">
     <a-row :gutter="24">
-        <a-col :span="12" class="job-detail__description">
+        <a-col :md="layoutGrid.md" :xs="layoutGrid.xs" class="job-detail__description">
             <div class="description__heading">
                 <h1>{{job.title}}</h1>
-                <a-tag>{{job.department}}</a-tag>
-                <a-tag>{{job.placementCity}}, {{job.placementCountry}}</a-tag>
-                <a-tag>{{job.salaryCurrency}} {{job.salaryMin}} - {{job.salaryMax}}</a-tag>
+                <a-tag class="description__tag">
+                    <fa icon="briefcase" class="icon"/>
+                    {{job.department}}
+                </a-tag>
+                <a-tag class="description__tag">
+                    <fa icon="map-marker" class="icon"/>
+                    {{job.placementCity}}, {{job.placementCountry}}
+                </a-tag>
+                <a-tag class="description__tag" v-show="job.isDisplaySalary==='Y'">
+                    <fa icon="money-bill" class="icon"/>
+                    {{parseFloat(job.salaryMin) | toCurrency }} - {{parseFloat(job.salaryMax) | toCurrency }}
+                </a-tag>
             </div>
             <div class="description__part">
                 <h2 class="j">Job Description</h2>
@@ -21,7 +30,7 @@
                 <span v-html="job.benefit" />
             </div>
         </a-col>
-        <a-col :span="12" class="job-detail__form">
+        <a-col :md="layoutGrid.md" :xs="layoutGrid.xs" class="job-detail__form">
             <a-card title="Please complete this form to apply to Pegadaian">
                 <a-form :form="jobForm" @submit="handleSubmit">
                     <a-form-item label="Full name">
@@ -318,20 +327,23 @@ import params from '../../utils/BusinessParams'
 export default {
     data() {
         return {
-            companyId: 'zKeNnbPCk9jiZ/6fiGF7L0hw/lFbiofDyxnO0LO/zsw=',
-            jobPositionId: '',
+            jobId: '',
             job: '',
-            jobForm: this.$form.createForm(this)
+            jobForm: this.$form.createForm(this),
+            layoutGrid: {
+                md: {
+                    span: 12
+                },
+                xs: {
+                    span: 24
+                }
+            }
         }
     },
     methods: {
         getJobDetail() {
-            this.jobPositionId = this.$route.params.id;
-            console.log('Job Position ID', this.jobPositionId);
-            this.$http.post('/jobposition/detail', {
-                companyId: this.companyId,
-                jobPositionId: this.jobPositionId
-            })
+            this.jobId = this.$route.params.id;
+            this.$http.get('/pegadaian/jobs/' + this.jobId)
             .then(response => {
                 let res = response.data;
                 this.job = res;
@@ -363,11 +375,20 @@ export default {
 <style lang="scss" scoped>
 .job-detail {
     padding: 48px 120px;
+    @media screen and (max-width: 767px) {
+        padding: 24px 16px;
+    }
     .job-detail__description {
         .description__heading {
             margin-bottom: 24px;
             padding-bottom: 16px;
             border-bottom: 1px solid #CACACA;
+            .description__tag {
+                margin-bottom: 4px;
+                .icon {
+                    margin-right: 4px;
+                }
+            }
         }
         .description__part {
             margin-bottom: 24px;

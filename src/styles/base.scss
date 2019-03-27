@@ -16,6 +16,10 @@
     background-color: white;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
     z-index: 99;
+    @media screen and (max-width: 767px) {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
     .app-header__logo {
         height: 24px;
         cursor: pointer;
