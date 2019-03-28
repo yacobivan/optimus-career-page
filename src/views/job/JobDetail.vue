@@ -1,6 +1,7 @@
 <template>
 <div class="job-detail">
     <a-row :gutter="24">
+        <!-- Job Description -->
         <a-col :md="layoutGrid.md" :xs="layoutGrid.xs" class="job-detail__description">
             <div class="description__heading">
                 <h1>{{job.title}}</h1>
@@ -112,17 +113,24 @@
                         </a-col>
                     </a-row>
                     <a-form-item label="Gender">
-                        <a-input 
-                            placeholder="Male or female..." 
+                        <a-select
                             v-decorator="['gender', {
                                 rules: [
                                     {
                                         required: true,
-                                        message: 'Please select gender.'
+                                        message: 'Gender should not be empty.'
                                     }
                                 ]
-                            }]" 
-                        />
+                            }]"
+                            placeholder="Please select gender"
+                            @change="handleGender">
+                            <a-select-option 
+                                v-for="(gender, value) of genders" 
+                                :key="value" 
+                                :value="gender.value">
+                                {{gender.text}}
+                            </a-select-option>
+                        </a-select>
                     </a-form-item>
                     <a-form-item label="Province">
                         <a-input 
@@ -330,6 +338,11 @@ export default {
             jobId: '',
             job: '',
             jobForm: this.$form.createForm(this),
+            genders: [],
+            input: {
+                fullName: '',
+                gender: ''
+            },
             layoutGrid: {
                 md: {
                     span: 12
@@ -353,6 +366,13 @@ export default {
                 console.log(error)
             })
         },
+        initBusinessParams() {
+            this.genders = params.genders;
+        },
+        handleGender(value) {
+            this.input.gender = value;
+            console.log('Selected', value)
+        },
         handleSubmit(e) {
             console.log('Submit!')
             e.preventDefault();
@@ -368,6 +388,7 @@ export default {
     },
     created() {
         this.getJobDetail();
+        this.initBusinessParams();
     }
 }
 </script>
