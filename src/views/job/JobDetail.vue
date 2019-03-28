@@ -267,10 +267,25 @@
                                 />
                             </a-form-item>
                         </a-col>
+                        <a-col :span="12">
+                            <a-form-item label="TOEFL/IELTS/TOEIC Score">
+                                <a-input 
+                                    placeholder="Example:  TOEFL-500"
+                                    v-decorator="['englishScore', {
+                                        rules: [
+                                            {
+                                                required: true,
+                                                message: 'Please enter score.'
+                                            }
+                                        ]
+                                    }]"
+                                />
+                            </a-form-item>
+                        </a-col>
                     </a-row>
                     <hr>
                     <h3>Other Questions</h3>
-                    <a-form-item label="Are you married?">
+                    <!-- <a-form-item label="Are you married?">
                          <a-select
                             v-decorator="['marriageStatus', {
                                 rules: [
@@ -289,7 +304,7 @@
                                 {{status.text}}
                             </a-select-option>
                         </a-select>
-                    </a-form-item>
+                    </a-form-item> -->
                     <a-form-item label="Do you have social media account?">
                         <a-input 
                             placeholder="https://linkedin.com/youraccount..."
@@ -354,14 +369,143 @@
                             }]"
                         />
                     </a-form-item>
+                    <hr>
+                    <h3>Attachments</h3>
                     <a-form-item label="Submit your resume (CV)">
                         <a-upload 
-                            placeholder="Enter city of birth"
                             v-decorator="['resumeFile', {
                                 rules: [
                                     {
                                         required: true,
                                         message: 'Please upload your recent resume.'
+                                    }
+                                ]
+                            }]"
+                        >
+                            <a-button>
+                                <a-icon type="upload" /> Click to upload
+                            </a-button>
+                        </a-upload>
+                    </a-form-item>
+                    <a-form-item label="Bachelor certificate (ijazah)">
+                        <a-upload 
+                            v-decorator="['bachelorCertificateFile', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your bachelor certificate.'
+                                    }
+                                ]
+                            }]"
+                        >
+                            <a-button>
+                                <a-icon type="upload" /> Click to upload
+                            </a-button>
+                        </a-upload>
+                    </a-form-item>
+                    <a-form-item label="Transcript">
+                        <a-upload 
+                            v-decorator="['transcript', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your transcript.'
+                                    }
+                                ]
+                            }]"
+                        >
+                            <a-button>
+                                <a-icon type="upload" /> Click to upload
+                            </a-button>
+                        </a-upload>
+                    </a-form-item>
+                    <a-form-item label="Identity card (KTP)">
+                        <a-upload 
+                            v-decorator="['identityCard', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your KTP.'
+                                    }
+                                ]
+                            }]"
+                        >
+                            <a-button>
+                                <a-icon type="upload" /> Click to upload
+                            </a-button>
+                        </a-upload>
+                    </a-form-item>
+                    <a-form-item label="Photo">
+                        <a-upload 
+                            v-decorator="['photo', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your photo.'
+                                    }
+                                ]
+                            }]"
+                        >
+                            <a-button>
+                                <a-icon type="upload" /> Click to upload
+                            </a-button>
+                        </a-upload>
+                    </a-form-item>
+                    <a-form-item label="Surat dokter">
+                        <a-upload 
+                            v-decorator="['doctorCertificateFile', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your surat dokter.'
+                                    }
+                                ]
+                            }]"
+                        >
+                            <a-button>
+                                <a-icon type="upload" /> Click to upload
+                            </a-button>
+                        </a-upload>
+                    </a-form-item>
+                    <a-form-item label="Surat keterangan catatan kepolisian">
+                        <a-upload 
+                            v-decorator="['policeCertificateFile', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your SKCK.'
+                                    }
+                                ]
+                            }]"
+                        >
+                            <a-button>
+                                <a-icon type="upload" /> Click to upload
+                            </a-button>
+                        </a-upload>
+                    </a-form-item>
+                    <a-form-item label="TOEFL/IELTS/TOEIC Certificate">
+                        <a-upload 
+                            v-decorator="['englishCertificate', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your certificate.'
+                                    }
+                                ]
+                            }]"
+                        >
+                            <a-button>
+                                <a-icon type="upload" /> Click to upload
+                            </a-button>
+                        </a-upload>
+                    </a-form-item>
+                    <a-form-item label="Surat pernyataan belum menikah selama 1 tahun">
+                        <a-upload 
+                            v-decorator="['maritalStatementCertificate', {
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: 'Please upload your bachelor certificate.'
                                     }
                                 ]
                             }]"
