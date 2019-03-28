@@ -8,7 +8,7 @@
         <router-view />
     </a-layout-content>
     <a-layout-footer class="app-footer">
-        Powered by Optimus Consulting &copy; 2019
+        Powered by Optimus &copy; 2019
     </a-layout-footer>
 </a-layout>
 </template>

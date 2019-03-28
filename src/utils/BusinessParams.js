@@ -799,5 +799,9 @@ export default {
         'Yahukimo', 
         'Yalimo', 
         'Yogyakarta'
+    ],
+    maritalStatuses: [
+        'Single',
+        'Married'
     ]
 }

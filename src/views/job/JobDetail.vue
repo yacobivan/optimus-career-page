@@ -2,7 +2,7 @@
 <div class="job-detail">
     <a-row :gutter="24">
         <!-- Job Description -->
-        <a-col :md="layoutGrid.md" :xs="layoutGrid.xs" class="job-detail__description">
+        <a-col :md="layoutGrid.md" :sm="layoutGrid.sm" class="job-detail__description">
             <div class="description__heading">
                 <h1>{{job.title}}</h1>
                 <a-tag class="description__tag">
@@ -31,7 +31,8 @@
                 <span v-html="job.benefit" />
             </div>
         </a-col>
-        <a-col :md="layoutGrid.md" :xs="layoutGrid.xs" class="job-detail__form">
+        <!-- Job Form -->
+        <a-col :md="layoutGrid.md" :sm="layoutGrid.sm" class="job-detail__form">
             <a-card title="Please complete this form to apply to Pegadaian">
                 <a-form :form="jobForm" @submit="handleSubmit">
                     <a-form-item label="Full name">
@@ -82,17 +83,25 @@
                     <a-row :gutter="16">
                         <a-col :span="12">
                             <a-form-item label="Birth place">
-                                <a-input 
-                                    placeholder="Enter city of birth..." 
+                                <a-select
                                     v-decorator="['birthPlace', {
                                         rules: [
                                             {
                                                 required: true,
-                                                message: 'Please enter city of birth.'
+                                                message: 'City of birth should not be empty.'
                                             }
                                         ]
-                                    }]" 
-                                />
+                                    }]"
+                                    showSearch
+                                    placeholder="Please select city"
+                                    @change="handleChange">
+                                    <a-select-option 
+                                        v-for="(city, value) of cities" 
+                                        :key="value" 
+                                        :value="city.value">
+                                        {{city.text}}
+                                    </a-select-option>
+                                </a-select>
                             </a-form-item>
                         </a-col>
                         <a-col :span="12">
@@ -107,7 +116,8 @@
                                                 message: 'Please select date!' 
                                             }
                                         ]
-                                    }]" 
+                                    }]"
+                                    @change="handleChange"
                                 />
                             </a-form-item>
                         </a-col>
@@ -123,7 +133,7 @@
                                 ]
                             }]"
                             placeholder="Please select gender"
-                            @change="handleGender">
+                            @change="handleChange">
                             <a-select-option 
                                 v-for="(gender, value) of genders" 
                                 :key="value" 
@@ -132,18 +142,26 @@
                             </a-select-option>
                         </a-select>
                     </a-form-item>
-                    <a-form-item label="Province">
-                        <a-input 
-                            placeholder="Enter province address..." 
+                    <a-form-item label="Address Province">
+                        <a-select
                             v-decorator="['addressProvince', {
                                 rules: [
                                     {
                                         required: true,
-                                        message: 'Please select province.'
+                                        message: 'Address province should not be empty.'
                                     }
                                 ]
-                            }]" 
-                        />
+                            }]"
+                            showSearch
+                            placeholder="Please select province"
+                            @change="handleChange">
+                            <a-select-option 
+                                v-for="(province, value) of provinces" 
+                                :key="value" 
+                                :value="province.value">
+                                {{province.text}}
+                            </a-select-option>
+                        </a-select>
                     </a-form-item>
                     <hr>
                     <h3>Education Background</h3>
@@ -165,52 +183,75 @@
                         </a-col>
                         <a-col :span="12">
                             <a-form-item label="College / school location">
-                                <a-input 
-                                    placeholder="Enter city of college / school..." 
+                                <a-select
                                     v-decorator="['educationCity', {
                                         rules: [
                                             {
                                                 required: true,
-                                                message: 'Please select city.'
+                                                message: 'School location should not be empty.'
                                             }
                                         ]
-                                    }]" 
-                                />
+                                    }]"
+                                    showSearch
+                                    placeholder="Please select city"
+                                    @change="handleChange">
+                                    <a-select-option 
+                                        v-for="(city, value) of cities" 
+                                        :key="value" 
+                                        :value="city.value">
+                                        {{city.text}}
+                                    </a-select-option>
+                                </a-select>
                             </a-form-item>
                         </a-col>
                         <a-col :span="12">
                             <a-form-item label="Degree of study">
-                                <a-input 
-                                    placeholder="D3, S1, S2, S3, ..." 
+                                <a-select
                                     v-decorator="['educationDegree', {
                                         rules: [
                                             {
                                                 required: true,
-                                                message: 'Please select degree.'
+                                                message: 'Degree of study should not be empty.'
                                             }
                                         ]
-                                    }]" 
-                                />
+                                    }]"
+                                    placeholder="Please select degree"
+                                    @change="handleChange">
+                                    <a-select-option 
+                                        v-for="(degree, value) of degrees" 
+                                        :key="value" 
+                                        :value="degree.value">
+                                        {{degree.text}}
+                                    </a-select-option>
+                                </a-select>
                             </a-form-item>
                         </a-col>
                         <a-col :span="12">
                             <a-form-item label="Field of study">
-                                <a-input 
-                                    placeholder="Enter field of study" 
+                                <a-select
                                     v-decorator="['educationMajor', {
                                         rules: [
                                             {
                                                 required: true,
-                                                message: 'Please select field of study.'
+                                                message: 'Field of study should not be empty.'
                                             }
                                         ]
-                                    }]" 
-                                />
+                                    }]"
+                                    showSearch
+                                    placeholder="Please select field of study"
+                                    @change="handleChange">
+                                    <a-select-option 
+                                        v-for="(major, value) of majors" 
+                                        :key="value" 
+                                        :value="major.value">
+                                        {{major.text}}
+                                    </a-select-option>
+                                </a-select>
                             </a-form-item>
                         </a-col>
                         <a-col :span="12">
                             <a-form-item label="GPA">
-                                <a-input 
+                                <a-input-number 
                                     placeholder="Enter GPA..."
                                     v-decorator="['educationGpa', {
                                         rules: [
@@ -219,7 +260,10 @@
                                                 message: 'Please enter GPA.'
                                             }
                                         ]
-                                    }]" 
+                                    }]"
+                                    :min="0"
+                                    :max="4"
+                                    @change="handleChange"
                                 />
                             </a-form-item>
                         </a-col>
@@ -227,17 +271,24 @@
                     <hr>
                     <h3>Other Questions</h3>
                     <a-form-item label="Are you married?">
-                        <a-input 
-                            placeholder="Single, married, divorced..."
+                         <a-select
                             v-decorator="['marriageStatus', {
                                 rules: [
                                     {
                                         required: true,
-                                        message: 'Please select marital status.'
+                                        message: 'Marrital status should not be empty.'
                                     }
                                 ]
-                            }]" 
-                        />
+                            }]"
+                            placeholder="Please select status"
+                            @change="handleChange">
+                            <a-select-option 
+                                v-for="(status, value) of maritalStatuses" 
+                                :key="value" 
+                                :value="status.value">
+                                {{status.text}}
+                            </a-select-option>
+                        </a-select>
                     </a-form-item>
                     <a-form-item label="Do you have social media account?">
                         <a-input 
@@ -339,15 +390,16 @@ export default {
             job: '',
             jobForm: this.$form.createForm(this),
             genders: [],
-            input: {
-                fullName: '',
-                gender: ''
-            },
+            cities: [],
+            provinces: [],
+            degrees: [],
+            majors: [],
+            maritalStatuses: [],
             layoutGrid: {
                 md: {
                     span: 12
                 },
-                xs: {
+                sm: {
                     span: 24
                 }
             }
@@ -368,10 +420,14 @@ export default {
         },
         initBusinessParams() {
             this.genders = params.genders;
+            this.cities = params.cities.map(city => ({value: city, text: city}));
+            this.provinces = params.provinces.map(province => ({value: province, text: province}));
+            this.degrees = params.degrees.map(degree => ({value: degree, text: degree}));
+            this.majors = params.fieldOfStudies.map(major => ({value: major, text: major}));
+            this.maritalStatuses = params.maritalStatuses.map(maritalStatus => ({value: maritalStatus, text: maritalStatus}));
         },
-        handleGender(value) {
-            this.input.gender = value;
-            console.log('Selected', value)
+        handleChange(value) {
+            console.log('Change', value)
         },
         handleSubmit(e) {
             console.log('Submit!')

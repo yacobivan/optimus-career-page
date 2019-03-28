@@ -19,24 +19,11 @@
         </div>
     </a-carousel>
     <div class="section">
-        <!-- Company Profile -->
+        <!-- Greetings -->
         <a-row :gutter="24">
             <a-col span="24" class="section__label">
                 <h1 class="heading">{{greeting}}</h1>
                 <h2 class="subheading">{{tagline}}</h2>
-            </a-col>
-            <a-col span="24" class="section__content">
-                {{about}}
-            </a-col>
-            <a-col span="24" class="section__content">
-                <div class="embed-container">
-                    <iframe 
-                        class="embed-responsive-item"
-                        :src="videoUrl" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen />
-                </div>
             </a-col>
         </a-row>
         <!-- Job Positions -->
@@ -54,6 +41,22 @@
                     :placementCountry="job.placementCountry" 
                     @clickApply="toJobDetail(job.jobPositionId)"
                 />
+            </a-col>
+        </a-row>
+        <!-- About -->
+        <a-row :gutter="24">
+            <a-col span="24" class="section__content">
+                <div class="embed-container">
+                    <iframe 
+                        class="embed-responsive-item"
+                        :src="videoUrl" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen />
+                </div>
+            </a-col>
+            <a-col span="24" class="section__content">
+                {{about}}
             </a-col>
         </a-row>
     </div>
@@ -152,7 +155,10 @@ export default {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto 48px auto;
-    padding: 48px 50px;
+    padding: 48px;
+    @media screen and (max-width: 767px) {
+        padding: 24px;
+    }
     .section__label {
         text-align: center;
         margin-bottom: 24px;
@@ -172,6 +178,7 @@ export default {
 .card-job-container {
     margin-bottom: 24px;
 }
+// Video Player
 .embed-container { 
     position: relative; 
     padding-bottom: 56.25%; 
@@ -187,7 +194,7 @@ export default {
         height: 80%;
     }
 }
-
+// Slide
 .slide-arrow {
     width: 25px;
     height: 25px;
