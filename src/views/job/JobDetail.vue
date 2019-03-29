@@ -93,8 +93,7 @@
                                         ]
                                     }]"
                                     showSearch
-                                    placeholder="Please select city"
-                                    @change="handleChange">
+                                    placeholder="Please select city">
                                     <a-select-option 
                                         v-for="(city, value) of cities" 
                                         :key="value" 
@@ -116,9 +115,7 @@
                                                 message: 'Please select date!' 
                                             }
                                         ]
-                                    }]"
-                                    @change="handleChange"
-                                />
+                                    }]"/>
                             </a-form-item>
                         </a-col>
                     </a-row>
@@ -132,8 +129,7 @@
                                     }
                                 ]
                             }]"
-                            placeholder="Please select gender"
-                            @change="handleChange">
+                            placeholder="Please select gender">
                             <a-select-option 
                                 v-for="(gender, value) of genders" 
                                 :key="value" 
@@ -153,8 +149,7 @@
                                 ]
                             }]"
                             showSearch
-                            placeholder="Please select province"
-                            @change="handleChange">
+                            placeholder="Please select province">
                             <a-select-option 
                                 v-for="(province, value) of provinces" 
                                 :key="value" 
@@ -193,8 +188,7 @@
                                         ]
                                     }]"
                                     showSearch
-                                    placeholder="Please select city"
-                                    @change="handleChange">
+                                    placeholder="Please select city">
                                     <a-select-option 
                                         v-for="(city, value) of cities" 
                                         :key="value" 
@@ -215,8 +209,7 @@
                                             }
                                         ]
                                     }]"
-                                    placeholder="Please select degree"
-                                    @change="handleChange">
+                                    placeholder="Please select degree">
                                     <a-select-option 
                                         v-for="(degree, value) of degrees" 
                                         :key="value" 
@@ -238,8 +231,7 @@
                                         ]
                                     }]"
                                     showSearch
-                                    placeholder="Please select field of study"
-                                    @change="handleChange">
+                                    placeholder="Please select field of study">
                                     <a-select-option 
                                         v-for="(major, value) of majors" 
                                         :key="value" 
@@ -262,9 +254,7 @@
                                         ]
                                     }]"
                                     :min="0"
-                                    :max="4"
-                                    @change="handleChange"
-                                />
+                                    :max="4"/>
                             </a-form-item>
                         </a-col>
                         <a-col :span="12">
@@ -285,26 +275,6 @@
                     </a-row>
                     <hr>
                     <h3>Other Questions</h3>
-                    <!-- <a-form-item label="Are you married?">
-                         <a-select
-                            v-decorator="['marriageStatus', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Marrital status should not be empty.'
-                                    }
-                                ]
-                            }]"
-                            placeholder="Please select status"
-                            @change="handleChange">
-                            <a-select-option 
-                                v-for="(status, value) of maritalStatuses" 
-                                :key="value" 
-                                :value="status.value">
-                                {{status.text}}
-                            </a-select-option>
-                        </a-select>
-                    </a-form-item> -->
                     <a-form-item label="Do you have social media account?">
                         <a-input 
                             placeholder="https://linkedin.com/youraccount..."
@@ -380,8 +350,7 @@
                                         message: 'Please upload your recent resume.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -396,8 +365,7 @@
                                         message: 'Please upload your bachelor certificate.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -412,8 +380,7 @@
                                         message: 'Please upload your transcript.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -428,8 +395,7 @@
                                         message: 'Please upload your KTP.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -444,8 +410,7 @@
                                         message: 'Please upload your photo.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -460,8 +425,7 @@
                                         message: 'Please upload your surat dokter.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -476,8 +440,7 @@
                                         message: 'Please upload your SKCK.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -492,8 +455,7 @@
                                         message: 'Please upload your certificate.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -508,8 +470,7 @@
                                         message: 'Please upload your bachelor certificate.'
                                     }
                                 ]
-                            }]"
-                        >
+                            }]">
                             <a-button>
                                 <a-icon type="upload" /> Click to upload
                             </a-button>
@@ -589,6 +550,14 @@ export default {
     created() {
         this.getJobDetail();
         this.initBusinessParams();
+    },
+    beforeDestroy() {
+        this.genders.destroy();
+        this.cities.destroy();
+        this.provinces.destroy();
+        this.degrees.destroy();
+        this.majors.destroy();
+        this.maritalStatuses.destroy();
     }
 }
 </script>

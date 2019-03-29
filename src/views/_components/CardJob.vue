@@ -4,7 +4,7 @@
         <div class="job__description">
             <h3>{{title}}</h3>
             <span class="description__tag"><fa icon="briefcase" class="icon"/> {{department}}</span>
-            <span class="description__tag"><fa icon="briefcase" class="icon"/> {{placementCity}}, {{placementCountry}}</span>
+            <span class="description__tag"><fa icon="map-marker" class="icon"/> {{placementCity}}, {{placementCountry}}</span>
         </div>
         <div class="job__button">
             <a-button type="primary" @click="apply">Apply</a-button>

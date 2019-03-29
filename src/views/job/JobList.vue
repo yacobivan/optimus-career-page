@@ -79,7 +79,8 @@ export default {
             jobs: [],
             jobPostGrid: {
                 md: {
-                    span: 12
+                    span: 12,
+                    offset: 6
                 },
                 xs: {
                     span: 24
