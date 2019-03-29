@@ -480,6 +480,7 @@
                         <a-button type="primary" html-type="submit" block>Drop My CV</a-button>
                     </a-form-item>
                 </a-form>
+                <span><small>This is a Demo Version, your application will not be submitted.</small></span>
             </a-card>
         </a-col>
     </a-row>

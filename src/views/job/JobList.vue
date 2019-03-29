@@ -122,7 +122,6 @@ export default {
             })
         },
         toJobDetail(_id) {
-            console.log('Apply hit!', _id)
             this.$router.push({
                 name: 'JobDetail',
                 params: {
@@ -196,6 +195,7 @@ export default {
     }
 }
 // Slide
+$slide-height-lg: 480px;
 .slide-arrow {
     width: 25px;
     height: 25px;
@@ -214,15 +214,24 @@ export default {
     }
 }
 .slide {
-    height: 480px;
+    height: auto;
     width: 100%;
     background-color: #212121;
     .slide__image {
-        width: auto;
-        height: 480px;
+        width: 100%;
+        height: auto;
         margin: 0 auto;
         object-fit: content;
         object-position: center;
+    }
+    @media screen and (max-width: 1280px) {
+        width: 100%;
+        height: auto;
+        .slide__image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
     }
 }
 </style>
