@@ -1,0 +1,105 @@
+<a-form-item label="Bachelor certificate (ijazah)">
+    <a-upload 
+        v-decorator="['bachelorCertificateFile', {
+            rules: [
+                {
+                    required: true,
+                    message: 'Please upload your bachelor certificate.'
+                }
+            ]
+        }]">
+        <a-button>
+            <a-icon type="upload" /> Click to upload
+        </a-button>
+    </a-upload>
+</a-form-item>
+<a-form-item label="Transcript">
+    <a-upload 
+        v-decorator="['transcript', {
+            rules: [
+                {
+                    required: true,
+                    message: 'Please upload your transcript.'
+                }
+            ]
+        }]">
+        <a-button>
+            <a-icon type="upload" /> Click to upload
+        </a-button>
+    </a-upload>
+</a-form-item>
+<a-form-item label="Identity card (KTP)">
+    <a-upload 
+        v-decorator="['identityCard', {
+            rules: [
+                {
+                    required: true,
+                    message: 'Please upload your KTP.'
+                }
+            ]
+        }]">
+        <a-button>
+            <a-icon type="upload" /> Click to upload
+        </a-button>
+    </a-upload>
+</a-form-item>
+<a-form-item label="Photo">
+    <a-upload 
+        v-decorator="['photo', {
+            rules: [
+                {
+                    required: true,
+                    message: 'Please upload your photo.'
+                }
+            ]
+        }]">
+        <a-button>
+            <a-icon type="upload" /> Click to upload
+        </a-button>
+    </a-upload>
+</a-form-item>
+<a-form-item label="Surat dokter">
+    <a-upload 
+        v-decorator="['doctorCertificateFile', {
+            rules: [
+                {
+                    required: true,
+                    message: 'Please upload your surat dokter.'
+                }
+            ]
+        }]">
+        <a-button>
+            <a-icon type="upload" /> Click to upload
+        </a-button>
+    </a-upload>
+</a-form-item>
+<a-form-item label="Surat keterangan catatan kepolisian">
+    <a-upload 
+        v-decorator="['policeCertificateFile', {
+            rules: [
+                {
+                    required: true,
+                    message: 'Please upload your SKCK.'
+                }
+            ]
+        }]">
+        <a-button>
+            <a-icon type="upload" /> Click to upload
+        </a-button>
+    </a-upload>
+</a-form-item>
+<a-form-item label="TOEFL/IELTS/TOEIC Certificate">
+    <a-upload 
+        v-decorator="['englishCertificateFile', {
+            rules: [
+                {
+                    required: true,
+                    message: 'Please upload your certificate.'
+                }
+            ]
+        }]">
+        <a-button>
+            <a-icon type="upload" /> Click to upload
+        </a-button>
+    </a-upload>
+</a-form-item>

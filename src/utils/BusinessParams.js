@@ -4,11 +4,11 @@ export default {
         { text: 'Female', value: 'F' }
     ],
     degrees: [
-        'High School (SMA, SMK, etc)',
-        'Diploma Degree (D3)',
-        'Bachelor Degree (S1, D4)',
-        'Master Degree',
-        'Doctorate'
+        'SMA, SMK',
+        'Diploma (D3)',
+        'Bachelor (S1, D4)',
+        'Master (S2)',
+        'Doctorate (S3)'
     ],
     fieldOfStudies: [
         'Advertising / Media', 

@@ -93,7 +93,8 @@
                                         ]
                                     }]"
                                     showSearch
-                                    placeholder="Please select city">
+                                    placeholder="Please select city"
+                                    @change="handleChange">
                                     <a-select-option 
                                         v-for="(city, value) of cities" 
                                         :key="value" 
@@ -115,7 +116,8 @@
                                                 message: 'Please select date!' 
                                             }
                                         ]
-                                    }]"/>
+                                    }]"
+                                    @change="handleChange"/>
                             </a-form-item>
                         </a-col>
                     </a-row>
@@ -129,7 +131,8 @@
                                     }
                                 ]
                             }]"
-                            placeholder="Please select gender">
+                            placeholder="Please select gender"
+                            @change="handleChange">
                             <a-select-option 
                                 v-for="(gender, value) of genders" 
                                 :key="value" 
@@ -149,7 +152,8 @@
                                 ]
                             }]"
                             showSearch
-                            placeholder="Please select province">
+                            placeholder="Please select province"
+                            @change="handleChange">
                             <a-select-option 
                                 v-for="(province, value) of provinces" 
                                 :key="value" 
@@ -188,7 +192,8 @@
                                         ]
                                     }]"
                                     showSearch
-                                    placeholder="Please select city">
+                                    placeholder="Please select city"
+                                    @change="handleChange">
                                     <a-select-option 
                                         v-for="(city, value) of cities" 
                                         :key="value" 
@@ -209,7 +214,8 @@
                                             }
                                         ]
                                     }]"
-                                    placeholder="Please select degree">
+                                    placeholder="Please select degree"
+                                    @change="handleChange">
                                     <a-select-option 
                                         v-for="(degree, value) of degrees" 
                                         :key="value" 
@@ -231,7 +237,8 @@
                                         ]
                                     }]"
                                     showSearch
-                                    placeholder="Please select field of study">
+                                    placeholder="Please select field of study"
+                                    @change="handleChange">
                                     <a-select-option 
                                         v-for="(major, value) of majors" 
                                         :key="value" 
@@ -339,143 +346,41 @@
                             }]"
                         />
                     </a-form-item>
-                    <hr>
-                    <h3>Attachments</h3>
-                    <a-form-item label="Submit your resume (CV)">
+                    <a-form-item label="Submit your files">
                         <a-upload 
-                            v-decorator="['resumeFile', {
+                            :fileList="file"
+                            :multiple="false"
+                            :remove="handleRemove"
+                            :beforeUpload="beforeUpload"
+                            :disabled="file.length>0"
+                            v-decorator="['file', {
                                 rules: [
                                     {
                                         required: true,
                                         message: 'Please upload your recent resume.'
                                     }
                                 ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
+                            }]"
+                            @change="handleChangeFile">
+                            <a-button :disabled="file.length>0">
+                                <a-icon type="upload" /> Select File
                             </a-button>
                         </a-upload>
                     </a-form-item>
-                    <a-form-item label="Bachelor certificate (ijazah)">
-                        <a-upload 
-                            v-decorator="['bachelorCertificateFile', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Please upload your bachelor certificate.'
-                                    }
-                                ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
-                            </a-button>
-                        </a-upload>
-                    </a-form-item>
-                    <a-form-item label="Transcript">
-                        <a-upload 
-                            v-decorator="['transcript', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Please upload your transcript.'
-                                    }
-                                ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
-                            </a-button>
-                        </a-upload>
-                    </a-form-item>
-                    <a-form-item label="Identity card (KTP)">
-                        <a-upload 
-                            v-decorator="['identityCard', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Please upload your KTP.'
-                                    }
-                                ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
-                            </a-button>
-                        </a-upload>
-                    </a-form-item>
-                    <a-form-item label="Photo">
-                        <a-upload 
-                            v-decorator="['photo', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Please upload your photo.'
-                                    }
-                                ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
-                            </a-button>
-                        </a-upload>
-                    </a-form-item>
-                    <a-form-item label="Surat dokter">
-                        <a-upload 
-                            v-decorator="['doctorCertificateFile', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Please upload your surat dokter.'
-                                    }
-                                ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
-                            </a-button>
-                        </a-upload>
-                    </a-form-item>
-                    <a-form-item label="Surat keterangan catatan kepolisian">
-                        <a-upload 
-                            v-decorator="['policeCertificateFile', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Please upload your SKCK.'
-                                    }
-                                ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
-                            </a-button>
-                        </a-upload>
-                    </a-form-item>
-                    <a-form-item label="TOEFL/IELTS/TOEIC Certificate">
-                        <a-upload 
-                            v-decorator="['englishCertificate', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Please upload your certificate.'
-                                    }
-                                ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
-                            </a-button>
-                        </a-upload>
-                    </a-form-item>
-                    <a-form-item label="Surat pernyataan belum menikah selama 1 tahun">
-                        <a-upload 
-                            v-decorator="['maritalStatementCertificate', {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Please upload your bachelor certificate.'
-                                    }
-                                ]
-                            }]">
-                            <a-button>
-                                <a-icon type="upload" /> Click to upload
-                            </a-button>
-                        </a-upload>
-                    </a-form-item>
+                    <div class="excerpt">
+                        File should be in ZIP or RAR format, containing these documents:
+                        <ul>
+                            <li>Curriculum vitae</li>
+                            <li>Bachelor certificate (ijazah)</li>
+                            <li>Transcript</li>
+                            <li>TOEFL / IELTS / TOEIC certificate</li>
+                            <li>Photo</li>
+                            <li>Identity card (KTP)</li>
+                            <li>Surat keterangan dokter</li>
+                            <li>Surat keterangan catatan kepolisian</li>
+                        </ul>
+                        We will not proceed the application if the above attachment is incomplete.
+                    </div>
                     <a-form-item>
                         <a-button type="primary" html-type="submit" block>Drop My CV</a-button>
                     </a-form-item>
@@ -488,7 +393,8 @@
 </template>
 
 <script>
-import params from '../../utils/BusinessParams'
+import moment from 'moment';
+import params from '../../utils/BusinessParams';
 export default {
     data() {
         return {
@@ -508,7 +414,10 @@ export default {
                 sm: {
                     span: 24
                 }
-            }
+            },
+            file: [],
+            responseMessage: {},
+            responseError: {}
         }
     },
     methods: {
@@ -532,6 +441,14 @@ export default {
             this.majors = params.fieldOfStudies.map(major => ({value: major, text: major}));
             this.maritalStatuses = params.maritalStatuses.map(maritalStatus => ({value: maritalStatus, text: maritalStatus}));
         },
+        destroyBusinessParams() {
+            this.genders.destroy();
+            this.cities.destroy();
+            this.provinces.destroy();
+            this.degrees.destroy();
+            this.majors.destroy();
+            this.maritalStatuses.destroy();
+        },
         handleChange(value) {
             console.log('Change', value)
         },
@@ -540,12 +457,59 @@ export default {
             e.preventDefault();
             this.jobForm.validateFields((err, values) => {
                 if (!err) {
-                    console.log('Values', values)
-
+                    console.log('Values', values);
+                    console.log('Date', moment(values.birthDate).format('YYYYMMDD'));
+                    let formData = new FormData();
+                    formData.append('jobPositionId', this.jobId),
+                    formData.append('fullName', values.fullName);
+                    formData.append('email', values.email);
+                    formData.append('phone', values.phone);
+                    formData.append('birthPlace', values.birthPlace);
+                    formData.append('birthDate', moment(values.birthDate).format('YYYYMMDD').toString());
+                    formData.append('gender', values.gender);
+                    formData.append('addressProvince', values.addressProvince);
+                    formData.append('educationSchool', values.educationSchool);
+                    formData.append('educationCity', values.educationCity);
+                    formData.append('educationDegree', values.educationDegree);
+                    formData.append('educationMajor', values.educationMajor);
+                    formData.append('educationGpa', values.educationGpa);
+                    formData.append('englishScore', values.englishScore);
+                    formData.append('socialMediaUrl', values.socialMediaUrl);
+                    formData.append('source', values.source);
+                    formData.append('questionExpectation', values.questionExpectation);
+                    formData.append('questionIdealism', values.questionIdealism);
+                    formData.append('questionVisionMission', values.questionVisionMission);
+                    formData.append('resumeFile', values.file.file);
+                    console.log('Form Data', formData.keys());
+                    this.$http.post('pegadaian/applicant/apply', formData)
+                    .then(response => {
+                        this.responseMessage = response.data;
+                        console.log(this.responseMessage)
+                    })
+                    .catch(error => {
+                        this.responseError = error;
+                        console.log(this.responseError);
+                    })
                 } else {
                     console.log('Incomplete')
                 }
             })
+        },
+        handleRemove(_file) {
+            const index = this.file.indexOf(_file);
+            const newFile = this.file.slice();
+            newFile.splice(index, 1);
+            this.file = newFile;
+        },
+        handleChangeFile(_file) {
+            let fileList = _file.fileList;
+            fileList = fileList.splice(-2);
+            this.file = fileList;
+            console.log('Uploaded', this.file);
+        },
+        beforeUpload(_file) {
+            this.file = [...this.file, _file]
+            return false;
         }
     },
     created() {
@@ -553,12 +517,7 @@ export default {
         this.initBusinessParams();
     },
     beforeDestroy() {
-        this.genders.destroy();
-        this.cities.destroy();
-        this.provinces.destroy();
-        this.degrees.destroy();
-        this.majors.destroy();
-        this.maritalStatuses.destroy();
+        this.destroyBusinessParams();
     }
 }
 </script>
@@ -585,6 +544,14 @@ export default {
             margin-bottom: 24px;
         }
     }
+}
+.excerpt {
+    padding: 8px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    line-height: 16px;
+    border: 1px dashed #CCCCCC;
+    border-radius: 4px;
 }
 </style>
 
