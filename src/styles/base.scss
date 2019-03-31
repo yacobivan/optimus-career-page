@@ -67,7 +67,7 @@
     }
     &:focus, &:active {
         border-color: $color-primary;
-        box-shadow: 0 0 0 2px rgba(76,167,89,.2);
+        box-shadow: 0 0 0 2px rgba($color-primary,.2);
     }
 }
 
@@ -79,13 +79,13 @@
         }
         &:focus, &:active {
             border-color: $color-primary;
-            box-shadow: 0 0 0 2px rgba(76,167,89,.2);
+            box-shadow: 0 0 0 2px rgba($color-primary,.2);
         }
     }
 }
 .ant-select.ant-select-open {
     .ant-select-selection {
         border-color: $color-primary;
-        box-shadow: 0 0 0 2px rgba(76,167,89,.2);
+        box-shadow: 0 0 0 2px rgba($color-primary,.2);
     }
 }
