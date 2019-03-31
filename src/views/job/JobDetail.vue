@@ -183,7 +183,7 @@
                         <a-col :span="12">
                             <a-form-item label="College / school location">
                                 <a-select
-                                    v-decorator="['educationCity', {
+                                    v-decorator="['educationProvince', {
                                         rules: [
                                             {
                                                 required: true,
@@ -192,13 +192,13 @@
                                         ]
                                     }]"
                                     showSearch
-                                    placeholder="Please select city"
+                                    placeholder="Please select province"
                                     @change="handleChange">
                                     <a-select-option 
-                                        v-for="(city, value) of cities" 
+                                        v-for="(province, value) of provinces" 
                                         :key="value" 
-                                        :value="city.value">
-                                        {{city.text}}
+                                        :value="province.value">
+                                        {{province.text}}
                                     </a-select-option>
                                 </a-select>
                             </a-form-item>
@@ -381,9 +381,14 @@
                         </ul>
                         We will not proceed the application if the above attachment is incomplete.
                     </div>
-                    <vue-recaptcha sitekey="6Ld8HpsUAAAAAL-uqBYpboPcHMB8ueDKX8kD540n" />
+                    <vue-recaptcha 
+                        :sitekey="sitekey"
+                        ref="recaptcha"
+                        @verify="onVerify"
+                        @expired="onExpired"
+                        size="normal" />
                     <a-form-item>
-                        <a-button type="primary" html-type="submit" block>Drop My CV</a-button>
+                        <a-button type="primary" html-type="submit" block :disabled="!isVerified">Drop My CV</a-button>
                     </a-form-item>
                 </a-form>
                 <span><small>This is a Demo Version, your application will not be submitted.</small></span>
@@ -419,7 +424,10 @@ export default {
             },
             file: [],
             responseMessage: {},
-            responseError: {}
+            responseError: {},
+            sitekey: '6Ld8HpsUAAAAAL-uqBYpboPcHMB8ueDKX8kD540n',
+            isVerified: false,
+            recaptchaResponse: ''
         }
     },
     components: {
@@ -474,7 +482,7 @@ export default {
                     formData.append('gender', values.gender);
                     formData.append('addressProvince', values.addressProvince);
                     formData.append('educationSchool', values.educationSchool);
-                    formData.append('educationCity', values.educationCity);
+                    formData.append('educationCity', values.educationProvince);
                     formData.append('educationDegree', values.educationDegree);
                     formData.append('educationMajor', values.educationMajor);
                     formData.append('educationGpa', values.educationGpa);
@@ -485,6 +493,7 @@ export default {
                     formData.append('questionIdealism', values.questionIdealism);
                     formData.append('questionVisionMission', values.questionVisionMission);
                     formData.append('resumeFile', values.file.file);
+                    formData.append('g-recaptcha-response', this.recaptchaResponse);
                     console.log('Form Data', formData.keys());
                     this.$http.post('pegadaian/applicant/apply', formData)
                     .then(response => {
@@ -515,6 +524,19 @@ export default {
         beforeUpload(_file) {
             this.file = [...this.file, _file]
             return false;
+        },
+        onVerify(response) {
+            console.log('Verify', response);
+            this.recaptchaResponse = response;
+            this.isVerified = true;
+        },
+        onExpired() {
+            console.log('Expired');
+            this.resetRecaptcha;
+            this.isVerified = false;
+        },
+        resetRecaptcha() {
+            this.$refs.recaptcha.reset();
         }
     },
     created() {
