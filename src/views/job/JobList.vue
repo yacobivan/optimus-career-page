@@ -96,7 +96,6 @@ export default {
             this.$http.get('/pegadaian/companyDetails')
             .then(response => {
                 let res = response.data;
-                console.log(res);
                 this.greeting = res.greeting;
                 this.tagline = res.tagline;
                 this.about = res.about;

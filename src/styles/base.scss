@@ -35,3 +35,57 @@
 .app-footer {
     text-align: center;
 }
+
+// Ant Button
+.ant-btn-primary {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    &:hover {
+        background-color: lighten($color-primary, 10%);
+        border-color: lighten($color-primary, 10%);
+    }
+    &:focus, &:active {
+        background-color: darken($color-primary, 10%);
+        border-color: darken($color-primary, 10%);
+    }
+}
+.ant-btn-default {
+    &:hover {
+        color: lighten($color-primary, 10%);
+        border-color: lighten($color-primary, 10%);
+    }
+    &:focus, &:active {
+        color: darken($color-primary, 10%);
+        border-color: darken($color-primary, 10%);
+    }
+}
+
+// Ant Input
+.ant-input {
+    &:hover {
+        border-color: $color-primary;
+    }
+    &:focus, &:active {
+        border-color: $color-primary;
+        box-shadow: 0 0 0 2px rgba(76,167,89,.2);
+    }
+}
+
+// Ant Select
+.ant-select {
+    .ant-select-selection {
+        &:hover {
+            border-color: $color-primary;
+        }
+        &:focus, &:active {
+            border-color: $color-primary;
+            box-shadow: 0 0 0 2px rgba(76,167,89,.2);
+        }
+    }
+}
+.ant-select.ant-select-open {
+    .ant-select-selection {
+        border-color: $color-primary;
+        box-shadow: 0 0 0 2px rgba(76,167,89,.2);
+    }
+}
