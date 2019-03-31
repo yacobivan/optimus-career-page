@@ -381,6 +381,7 @@
                         </ul>
                         We will not proceed the application if the above attachment is incomplete.
                     </div>
+                    <vue-recaptcha sitekey="6Ld8HpsUAAAAAL-uqBYpboPcHMB8ueDKX8kD540n" />
                     <a-form-item>
                         <a-button type="primary" html-type="submit" block>Drop My CV</a-button>
                     </a-form-item>
@@ -395,6 +396,7 @@
 <script>
 import moment from 'moment';
 import params from '../../utils/BusinessParams';
+import VueRecaptcha from 'vue-recaptcha';
 export default {
     data() {
         return {
@@ -419,6 +421,9 @@ export default {
             responseMessage: {},
             responseError: {}
         }
+    },
+    components: {
+        VueRecaptcha
     },
     methods: {
         getJobDetail() {
